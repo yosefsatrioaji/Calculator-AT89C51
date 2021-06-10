@@ -1,0 +1,700 @@
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SOURCE_CODE
+OBJECT MODULE PLACED IN .\Objects\source_code.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE source_code.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND LISTINCLUDE SY
+                    -MBOLS PRINT(.\Listings\source_code.lst) TABS(2) PREPRINT(.\Listings\source_code.i) OBJECT(.\Objects\source_code.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   1      =1  /*--------------------------------------------------------------------------
+   2      =1  REG51.H
+   3      =1  
+   4      =1  Header file for generic 80C51 and 80C31 microcontroller.
+   5      =1  Copyright (c) 1988-2002 Keil Elektronik GmbH and Keil Software, Inc.
+   6      =1  All rights reserved.
+   7      =1  --------------------------------------------------------------------------*/
+   8      =1  
+   9      =1  #ifndef __REG51_H__
+  10      =1  #define __REG51_H__
+  11      =1  
+  12      =1  /*  BYTE Register  */
+  13      =1  sfr P0   = 0x80;
+  14      =1  sfr P1   = 0x90;
+  15      =1  sfr P2   = 0xA0;
+  16      =1  sfr P3   = 0xB0;
+  17      =1  sfr PSW  = 0xD0;
+  18      =1  sfr ACC  = 0xE0;
+  19      =1  sfr B    = 0xF0;
+  20      =1  sfr SP   = 0x81;
+  21      =1  sfr DPL  = 0x82;
+  22      =1  sfr DPH  = 0x83;
+  23      =1  sfr PCON = 0x87;
+  24      =1  sfr TCON = 0x88;
+  25      =1  sfr TMOD = 0x89;
+  26      =1  sfr TL0  = 0x8A;
+  27      =1  sfr TL1  = 0x8B;
+  28      =1  sfr TH0  = 0x8C;
+  29      =1  sfr TH1  = 0x8D;
+  30      =1  sfr IE   = 0xA8;
+  31      =1  sfr IP   = 0xB8;
+  32      =1  sfr SCON = 0x98;
+  33      =1  sfr SBUF = 0x99;
+  34      =1  
+  35      =1  
+  36      =1  /*  BIT Register  */
+  37      =1  /*  PSW   */
+  38      =1  sbit CY   = 0xD7;
+  39      =1  sbit AC   = 0xD6;
+  40      =1  sbit F0   = 0xD5;
+  41      =1  sbit RS1  = 0xD4;
+  42      =1  sbit RS0  = 0xD3;
+  43      =1  sbit OV   = 0xD2;
+  44      =1  sbit P    = 0xD0;
+  45      =1  
+  46      =1  /*  TCON  */
+  47      =1  sbit TF1  = 0x8F;
+  48      =1  sbit TR1  = 0x8E;
+  49      =1  sbit TF0  = 0x8D;
+  50      =1  sbit TR0  = 0x8C;
+  51      =1  sbit IE1  = 0x8B;
+  52      =1  sbit IT1  = 0x8A;
+  53      =1  sbit IE0  = 0x89;
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 2   
+
+  54      =1  sbit IT0  = 0x88;
+  55      =1  
+  56      =1  /*  IE   */
+  57      =1  sbit EA   = 0xAF;
+  58      =1  sbit ES   = 0xAC;
+  59      =1  sbit ET1  = 0xAB;
+  60      =1  sbit EX1  = 0xAA;
+  61      =1  sbit ET0  = 0xA9;
+  62      =1  sbit EX0  = 0xA8;
+  63      =1  
+  64      =1  /*  IP   */ 
+  65      =1  sbit PS   = 0xBC;
+  66      =1  sbit PT1  = 0xBB;
+  67      =1  sbit PX1  = 0xBA;
+  68      =1  sbit PT0  = 0xB9;
+  69      =1  sbit PX0  = 0xB8;
+  70      =1  
+  71      =1  /*  P3  */
+  72      =1  sbit RD   = 0xB7;
+  73      =1  sbit WR   = 0xB6;
+  74      =1  sbit T1   = 0xB5;
+  75      =1  sbit T0   = 0xB4;
+  76      =1  sbit INT1 = 0xB3;
+  77      =1  sbit INT0 = 0xB2;
+  78      =1  sbit TXD  = 0xB1;
+  79      =1  sbit RXD  = 0xB0;
+  80      =1  
+  81      =1  /*  SCON  */
+  82      =1  sbit SM0  = 0x9F;
+  83      =1  sbit SM1  = 0x9E;
+  84      =1  sbit SM2  = 0x9D;
+  85      =1  sbit REN  = 0x9C;
+  86      =1  sbit TB8  = 0x9B;
+  87      =1  sbit RB8  = 0x9A;
+  88      =1  sbit TI   = 0x99;
+  89      =1  sbit RI   = 0x98;
+  90      =1  
+  91      =1  #endif
+   2          #include <stdio.h>
+   1      =1  /*--------------------------------------------------------------------------
+   2      =1  STDIO.H
+   3      =1  
+   4      =1  Prototypes for standard I/O functions.
+   5      =1  Copyright (c) 1988-2002 Keil Elektronik GmbH and Keil Software, Inc.
+   6      =1  All rights reserved.
+   7      =1  --------------------------------------------------------------------------*/
+   8      =1  
+   9      =1  #ifndef __STDIO_H__
+  10      =1  #define __STDIO_H__
+  11      =1  
+  12      =1  #ifndef EOF
+  13      =1   #define EOF -1
+  14      =1  #endif
+  15      =1  
+  16      =1  #ifndef NULL
+  17      =1   #define NULL ((void *) 0)
+  18      =1  #endif
+  19      =1  
+  20      =1  #ifndef _SIZE_T
+  21      =1   #define _SIZE_T
+  22      =1   typedef unsigned int size_t;
+  23      =1  #endif
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 3   
+
+  24      =1  
+  25      =1  #pragma SAVE
+  26      =1  #pragma REGPARMS
+  27      =1  extern char _getkey (void);
+  28      =1  extern char getchar (void);
+  29      =1  extern char ungetchar (char);
+  30      =1  extern char putchar (char);
+  31      =1  extern int printf   (const char *, ...);
+  32      =1  extern int sprintf  (char *, const char *, ...);
+  33      =1  extern int vprintf  (const char *, char *);
+  34      =1  extern int vsprintf (char *, const char *, char *);
+  35      =1  extern char *gets (char *, int n);
+  36      =1  extern int scanf (const char *, ...);
+  37      =1  extern int sscanf (char *, const char *, ...);
+  38      =1  extern int puts (const char *);
+  39      =1  
+  40      =1  #pragma RESTORE
+  41      =1  
+  42      =1  #endif
+  43      =1  
+   3          #include <string.h>
+   1      =1  /*--------------------------------------------------------------------------
+   2      =1  STRING.H
+   3      =1  
+   4      =1  String functions.
+   5      =1  Copyright (c) 1988-2008 Keil Elektronik GmbH and Keil Software, Inc.
+   6      =1  Copyright (c) 2008-2016 ARM Germany GmbH
+   7      =1  All rights reserved.
+   8      =1  --------------------------------------------------------------------------*/
+   9      =1  
+  10      =1  #ifndef __STRING_H__
+  11      =1  #define __STRING_H__
+  12      =1  
+  13      =1  #ifndef _SIZE_T
+           =1  #define _SIZE_T
+           =1  typedef unsigned int size_t;
+           =1 #endif
+  17      =1  
+  18      =1  #ifndef NULL
+           =1  #define NULL ((void *)0)
+           =1 #endif
+  21      =1  
+  22      =1  #pragma SAVE
+  23      =1  #pragma REGPARMS
+  24      =1  extern char  *strcat  (char *s1, const char *s2);
+  25      =1  extern char  *strncat (char *s1, const char *s2, size_t n);
+  26      =1  
+  27      =1  extern char   strcmp  (const char *s1, const char *s2);
+  28      =1  extern char   strncmp (const char *s1, const char *s2, size_t n);
+  29      =1  
+  30      =1  extern char  *strcpy  (char *s1, const char *s2);
+  31      =1  extern char  *strncpy (char *s1, const char *s2, size_t n);
+  32      =1  
+  33      =1  extern size_t strlen  (const char *);
+  34      =1  
+  35      =1  extern char  *strchr  (const char *s, char c);
+  36      =1  extern int    strpos  (const char *s, char c);
+  37      =1  extern char  *strrchr (const char *s, char c);
+  38      =1  extern int    strrpos (const char *s, char c);
+  39      =1  
+  40      =1  extern size_t strspn  (const char *s, const char *set);
+  41      =1  extern size_t strcspn (const char *s, const char *set);
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 4   
+
+  42      =1  extern char  *strpbrk (const char *s, const char *set);
+  43      =1  extern char  *strrpbrk(const char *s, const char *set);
+  44      =1  extern char  *strstr  (const char *s, const char *sub);
+  45      =1  extern char  *strtok  (char *str, const char *set);
+  46      =1  
+  47      =1  extern char   memcmp  (const void *s1, const void *s2, size_t n);
+  48      =1  extern void  *memcpy  (void *s1, const void *s2, size_t n);
+  49      =1  extern void  *memchr  (const void *s, char val, size_t n);
+  50      =1  extern void  *memccpy (void *s1, const void *s2, char val, size_t n);
+  51      =1  extern void  *memmove (void *s1, const void *s2, size_t n);
+  52      =1  extern void  *memset  (void *s, char val, size_t n);
+  53      =1  #pragma RESTORE
+  54      =1  
+  55      =1  #endif
+   4          #include <stdlib.h>
+   1      =1  /*--------------------------------------------------------------------------
+   2      =1  STDLIB.H
+   3      =1  
+   4      =1  Standard functions.
+   5      =1  Copyright (c) 1988-2008 Keil Elektronik GmbH and Keil Software, Inc.
+   6      =1  Copyright (c) 2008-2016 ARM Germany GmbH
+   7      =1  All rights reserved.
+   8      =1  --------------------------------------------------------------------------*/
+   9      =1  
+  10      =1  #ifndef __STDLIB_H__
+  11      =1  #define __STDLIB_H__
+  12      =1  
+  13      =1  #ifndef _SIZE_T
+           =1  #define _SIZE_T
+           =1  typedef unsigned int size_t;
+           =1 #endif
+  17      =1  
+  18      =1  #ifndef NULL
+           =1  #define NULL ((void *)0)
+           =1 #endif
+  21      =1  
+  22      =1  #ifndef _WCHAR_T_DEFINED_
+  23      =1  #define _WCHAR_T_DEFINED_
+  24      =1  typedef char wchar_t;
+  25      =1  #endif
+  26      =1  
+  27      =1  #if defined (__CX2__)
+           =1 #ifndef _DIV_T_DEFINED
+           =1 typedef struct _div_t {
+           =1         int quot;
+           =1         int rem;
+           =1 } div_t;
+           =1 typedef struct _ldiv_t {
+           =1         long quot;
+           =1         long rem;
+           =1 } ldiv_t;
+           =1 #define _DIV_T_DEFINED
+           =1 #endif // _DIV_T_DEFINED
+           =1 #endif // __CX2__
+  40      =1  
+  41      =1  #ifndef RAND_MAX
+  42      =1   #define RAND_MAX  32767u
+  43      =1  #endif
+  44      =1  
+  45      =1  #if defined (__CX2__)
+           =1 #pragma SAVE
+           =1 #pragma FUNCTIONS(STATIC)
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 5   
+
+           =1 /* intrinsic functions are reentrant, but need static attribute */
+           =1 extern int    abs  (int   val);
+           =1 #pragma RESTORE
+           =1 #endif // __CX2__
+  52      =1  
+  53      =1  #pragma SAVE
+  54      =1  #pragma REGPARMS
+  55      =1  
+  56      =1  extern char   cabs (char  val);
+  57      =1  #if !defined (__CX2__)
+  58      =1  extern int    abs  (int   val);
+  59      =1  #endif // __CX2__
+  60      =1  extern long   labs (long  val);
+  61      =1  
+  62      =1  extern float  atof (const char *s1);
+  63      =1  extern long   atol (const char *s1);
+  64      =1  extern int    atoi (const char *s1);
+  65      =1  extern int    rand (void);
+  66      =1  extern void   srand (unsigned int seed);
+  67      =1  
+  68      =1  #ifdef _DIV_T_DEFINED
+           =1 extern div_t  __div (int numer, int denom);
+           =1 #define div(numer,denom)  __div((numer),(denom));
+           =1 extern ldiv_t ldiv (long numer, long denom);
+           =1 #endif // _DIV_T_DEFINED
+  73      =1  
+  74      =1  extern float         strtod  (const char *nptr, char **endptr);
+  75      =1  extern long          strtol  (const char *nptr, char **endptr, unsigned char base);
+  76      =1  extern unsigned long strtoul (const char *nptr, char **endptr, unsigned char base);
+  77      =1  
+  78      =1  #define _MALLOC_MEM_  xdata
+  79      =1  
+  80      =1  extern void init_mempool          (void _MALLOC_MEM_ *p, size_t size);
+  81      =1  extern void _MALLOC_MEM_ *malloc  (size_t size);
+  82      =1  extern void free                  (void _MALLOC_MEM_ *p);
+  83      =1  extern void _MALLOC_MEM_ *realloc (void _MALLOC_MEM_ *p, size_t size);
+  84      =1  extern void _MALLOC_MEM_ *calloc  (size_t nmemb, size_t size);
+  85      =1  
+  86      =1  #if defined (__CX2__)
+           =1 extern void abort(void);
+           =1 #endif // __CX2__
+  89      =1  
+  90      =1  #pragma RESTORE
+  91      =1  
+  92      =1  #endif // __STDLIB_H__
+   5          #define SegOne   0xf7
+   6          #define SegTwo   0xfe
+   7          #define SegThree 0xfd
+   8          #define SegFour  0xfb
+   9          sbit R1 = P1^0;     // Connecting keypad to Port 1
+  10          sbit R2 = P1^1;
+  11          sbit R3 = P1^2;
+  12          sbit R4 = P1^3;
+  13          sbit C1 = P1^4;
+  14          sbit C2 = P1^5;
+  15          sbit C3 = P1^6;
+  16          sbit C4 = P1^7;
+  17          int number1;
+  18          int number2;
+  19          int angka1=0;
+  20          int buffer;
+  21          int angka2=0;
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 6   
+
+  22          int angka3=0;
+  23          int angka4=0;
+  24          int angka5=0;
+  25          int hasil1;
+  26          int hasil2;
+  27          int hasilcount;
+  28          
+  29          void DELAY_ms(unsigned int ms_Count) 
+  30          {
+  31   1          unsigned int i, j;
+  32   1          for (i = 0; i < ms_Count; i++) 
+  33   1          {
+  34   2              for (j = 0; j < 100; j++);
+  35   2          }
+  36   1      }
+  37          
+  38          void concat1(int a, int b,int c,int d)
+  39          {
+  40   1        char s1[1];
+  41   1        char s2[1];
+  42   1        char s3[1];
+  43   1        char s4[1];
+  44   1          
+  45   1        if(a !=0){
+  46   2          sprintf(s1, "%d", a);
+  47   2          sprintf(s2, "%d", b);
+  48   2          sprintf(s3,"%d",c);
+  49   2          sprintf(s4,"%d",d);
+  50   2          strcat(s1, s2);
+  51   2          strcat(s1,s3);
+  52   2          strcat(s1,s4);
+  53   2          DELAY_ms(200);
+  54   2          hasil1= atoi(s1);
+  55   2          DELAY_ms(200);
+  56   2        }
+  57   1        else{
+  58   2          if(b !=0){
+  59   3          sprintf(s2, "%d", b);
+  60   3          sprintf(s3,"%d",c);
+  61   3          sprintf(s4,"%d",d);
+  62   3          strcat(s2,s3);
+  63   3          strcat(s2,s4);
+  64   3          DELAY_ms(200);
+  65   3          hasil1= atoi(s2);
+  66   3            DELAY_ms(200);
+  67   3          }
+  68   2          else{
+  69   3            if(c !=0){
+  70   4              sprintf(s3,"%d",c);
+  71   4              sprintf(s4,"%d",d);
+  72   4              strcat(s3,s4);
+  73   4              DELAY_ms(200);
+  74   4              hasil1= atoi(s3);
+  75   4              DELAY_ms(200);
+  76   4            }
+  77   3            else{
+  78   4              DELAY_ms(200);
+  79   4              hasil1=d;
+  80   4              DELAY_ms(200);
+  81   4            }
+  82   3          }
+  83   2        }
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 7   
+
+  84   1      }
+  85          
+  86          void concat2(int f, int g,int h,int i)
+  87          {
+  88   1        char s5[1];
+  89   1        char s6[1];
+  90   1        char s7[1];
+  91   1        char s8[1];
+  92   1          
+  93   1        if(f !=0){
+  94   2          sprintf(s5, "%d", f);
+  95   2          sprintf(s6, "%d", g);
+  96   2          sprintf(s7,"%d",h);
+  97   2          sprintf(s8,"%d",i);
+  98   2          strcat(s5, s6);
+  99   2          strcat(s5,s7);
+ 100   2          strcat(s5,s8);
+ 101   2          DELAY_ms(200);
+ 102   2          hasil2= atoi(s5);
+ 103   2          DELAY_ms(200);
+ 104   2        }
+ 105   1        else{
+ 106   2          if(g !=0){
+ 107   3          sprintf(s6, "%d", g);
+ 108   3          sprintf(s7,"%d",h);
+ 109   3          sprintf(s8,"%d",i);
+ 110   3          strcat(s6,s7);
+ 111   3          strcat(s6,s7);
+ 112   3            DELAY_ms(200);
+ 113   3          hasil2= atoi(s6);
+ 114   3            DELAY_ms(200);
+ 115   3          }
+ 116   2          else{
+ 117   3            if(h !=0){
+ 118   4              sprintf(s7,"%d",h);
+ 119   4              sprintf(s8,"%d",i);
+ 120   4              strcat(s7,s8);
+ 121   4              DELAY_ms(200);
+ 122   4              hasil2= atoi(s7);
+ 123   4              DELAY_ms(200);
+ 124   4            }
+ 125   3            else{
+ 126   4              DELAY_ms(200);
+ 127   4              hasil2=i;
+ 128   4              DELAY_ms(200);
+ 129   4            }
+ 130   3          }
+ 131   2        }
+ 132   1      }
+ 133          
+ 134          void push(int angka){
+ 135   1      angka5=angka;DELAY_ms(50);
+ 136   1      buffer=angka2;DELAY_ms(50);
+ 137   1      angka1=buffer;DELAY_ms(50);
+ 138   1      buffer=angka3;DELAY_ms(50);
+ 139   1      angka2=buffer;DELAY_ms(50);
+ 140   1      buffer=angka4;DELAY_ms(50);
+ 141   1      angka3=buffer;DELAY_ms(50);
+ 142   1      buffer=angka5;DELAY_ms(50);
+ 143   1      angka4=buffer;DELAY_ms(50);
+ 144   1      }
+ 145          
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 8   
+
+ 146          int nthdig(int n, int k){
+ 147   1          while(n--)
+ 148   1              k/=10;
+ 149   1          return k%10;
+ 150   1      }
+ 151          
+ 152          void row_finder1() //Function for finding the row for column 1
+ 153          {
+ 154   1      R1=R2=R3=R4=1;
+ 155   1      C1=C2=C3=C4=0;
+ 156   1      
+ 157   1      if(R1==0){push(7);DELAY_ms(200);}
+ 158   1      if(R2==0){push(4);DELAY_ms(200);}
+ 159   1      if(R3==0){push(1);DELAY_ms(200);}
+ 160   1      if(R4==0){
+ 161   2      number1=0;
+ 162   2      number2=0;
+ 163   2      angka1=0;
+ 164   2      angka2=0;
+ 165   2      angka3=0;
+ 166   2      angka4=0;
+ 167   2      angka5=0;
+ 168   2      hasil1=0;
+ 169   2      hasil2=0;
+ 170   2      hasilcount=0;
+ 171   2      DELAY_ms(100);
+ 172   2        }
+ 173   1      }
+ 174          
+ 175          void row_finder2() //Function for finding the row for column 2
+ 176          {
+ 177   1      R1=R2=R3=R4=1;
+ 178   1      C1=C2=C3=C4=0;
+ 179   1      
+ 180   1      if(R1==0){push(8);DELAY_ms(200);}
+ 181   1      if(R2==0){push(5);DELAY_ms(200);}
+ 182   1      if(R3==0){push(2);DELAY_ms(200);}
+ 183   1      if(R4==0){push(0);DELAY_ms(200);}
+ 184   1      }
+ 185          
+ 186          
+ 187          void row_finder3() //Function for finding the row for column 3
+ 188          {
+ 189   1      R1=R2=R3=R4=1;
+ 190   1      C1=C2=C3=C4=0;
+ 191   1      
+ 192   1      if(R1==0){push(9);DELAY_ms(200);}
+ 193   1      if(R2==0){push(6);DELAY_ms(200);}
+ 194   1      if(R3==0){push(3);DELAY_ms(200);}
+ 195   1      if(R4==0){
+ 196   2      concat1(angka1,angka2,angka3,angka4);DELAY_ms(200);
+ 197   2      number1=0;
+ 198   2      number2=0;
+ 199   2      angka1=0;
+ 200   2      angka2=0;
+ 201   2      angka3=0;
+ 202   2      angka4=0;
+ 203   2      angka5=0;DELAY_ms(200);
+ 204   2      //number1[0]=0;number1[1]=0;number1[2]=0;number1[3]=0;
+ 205   2      }
+ 206   1      }
+ 207          
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 9   
+
+ 208          void row_finder4() //Function for finding the row for column 4
+ 209          {
+ 210   1      R1=R2=R3=R4=1;
+ 211   1      C1=C2=C3=C4=0;
+ 212   1      
+ 213   1      if(R1==0){
+ 214   2        concat2(angka1,angka2,angka3,angka4);
+ 215   2        DELAY_ms(200);
+ 216   2        hasilcount=hasil1/hasil2;
+ 217   2        DELAY_ms(200);
+ 218   2        angka1=nthdig(3,hasilcount);
+ 219   2        DELAY_ms(200);
+ 220   2        angka2=nthdig(2,hasilcount);
+ 221   2        DELAY_ms(200);
+ 222   2        angka3=nthdig(1,hasilcount);
+ 223   2        DELAY_ms(200);
+ 224   2        angka4=nthdig(0,hasilcount);
+ 225   2      }
+ 226   1      if(R2==0){  
+ 227   2        concat2(angka1,angka2,angka3,angka4);
+ 228   2        DELAY_ms(200);
+ 229   2        hasilcount=hasil1*hasil2;
+ 230   2        DELAY_ms(200);
+ 231   2        angka1=nthdig(3,hasilcount);
+ 232   2        DELAY_ms(200);
+ 233   2        angka2=nthdig(2,hasilcount);
+ 234   2        DELAY_ms(200);
+ 235   2        angka3=nthdig(1,hasilcount);
+ 236   2        DELAY_ms(200);
+ 237   2        angka4=nthdig(0,hasilcount);
+ 238   2      }
+ 239   1      if(R3==0){
+ 240   2        concat2(angka1,angka2,angka3,angka4);
+ 241   2        DELAY_ms(200);
+ 242   2        hasilcount=hasil1-hasil2;
+ 243   2        DELAY_ms(200);
+ 244   2        angka1=nthdig(3,hasilcount);
+ 245   2        DELAY_ms(200);
+ 246   2        angka2=nthdig(2,hasilcount);
+ 247   2        DELAY_ms(200);
+ 248   2        angka3=nthdig(1,hasilcount);
+ 249   2        DELAY_ms(200);
+ 250   2        angka4=nthdig(0,hasilcount);
+ 251   2      }
+ 252   1      if(R4==0){
+ 253   2        concat2(angka1,angka2,angka3,angka4);
+ 254   2        DELAY_ms(200);
+ 255   2        hasilcount=hasil1+hasil2;
+ 256   2        DELAY_ms(200);
+ 257   2        angka1=nthdig(3,hasilcount);
+ 258   2        DELAY_ms(200);
+ 259   2        angka2=nthdig(2,hasilcount);
+ 260   2        DELAY_ms(200);
+ 261   2        angka3=nthdig(1,hasilcount);
+ 262   2        DELAY_ms(200);
+ 263   2        angka4=nthdig(0,hasilcount);
+ 264   2      }
+ 265   1      }
+ 266          
+ 267          int main() {
+ 268   1      
+ 269   1          char hexvalue[] = {0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90, 0x88, 0x7c, 0x39, 0x5e,
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 10  
+
+             - 0x79, 0x71};
+ 270   1      number1=0;
+ 271   1      number2=0;
+ 272   1      angka1=0;
+ 273   1      angka2=0;
+ 274   1      angka3=0;
+ 275   1      angka4=0;
+ 276   1      angka5=0;
+ 277   1          while (1) 
+ 278   1          {
+ 279   2      C1=C2=C3=C4=1;
+ 280   2      R1=R2=R3=R4=0;
+ 281   2      if(C1==0)
+ 282   2      row_finder1();
+ 283   2      else if(C2==0)
+ 284   2      row_finder2();
+ 285   2      else if(C3==0)
+ 286   2      row_finder3();
+ 287   2      else if(C4==0)
+ 288   2      row_finder4();
+ 289   2            P3 = SegOne; 
+ 290   2            P2 = hexvalue[angka1];               
+ 291   2            DELAY_ms(1);
+ 292   2            P3 = SegTwo; 
+ 293   2            P2 = hexvalue[angka2];               
+ 294   2            DELAY_ms(1);
+ 295   2            P3 = SegThree; 
+ 296   2            P2 = hexvalue[angka3];               
+ 297   2            DELAY_ms(1);
+ 298   2            P3 = SegFour; 
+ 299   2            P2 = hexvalue[angka4];               
+ 300   2            DELAY_ms(1);
+ 301   2          }
+ 302   1              
+ 303   1      }
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 11  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+P1 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   0090H  1
+_nthdig. . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0006H  -----
+  n. . . . . . . . . . . . . . . . . .  * REG *  DATA   INT      0082H  2
+  k. . . . . . . . . . . . . . . . . .  * REG *  DATA   INT      0002H  2
+P2 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00A0H  1
+R1 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0090H  1
+P3 . . . . . . . . . . . . . . . . . .  SFR      DATA   U_CHAR   00B0H  1
+R2 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0091H  1
+R3 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0092H  1
+R4 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0093H  1
+_sprintf . . . . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+size_t . . . . . . . . . . . . . . . .  TYPEDEF  -----  U_INT    -----  2
+_strcat. . . . . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+main . . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  hexvalue . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    0000H  16
+_concat1 . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  a. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0006H  2
+  b. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0002H  2
+  c. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0004H  2
+  d. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0006H  2
+  s1 . . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    0008H  1
+  s2 . . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    0009H  1
+  s3 . . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    000AH  1
+  s4 . . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    000BH  1
+_concat2 . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0012H  -----
+  f. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0006H  2
+  g. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0002H  2
+  h. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0004H  2
+  i. . . . . . . . . . . . . . . . . .  AUTO     DATA   INT      0006H  2
+  s5 . . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    0008H  1
+  s6 . . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    0009H  1
+  s7 . . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    000AH  1
+  s8 . . . . . . . . . . . . . . . . .  AUTO     DATA   ARRAY    000BH  1
+_atoi. . . . . . . . . . . . . . . . .  EXTERN   CODE   PROC     -----  -----
+_DELAY_ms. . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0044H  -----
+  ms_Count . . . . . . . . . . . . . .  * REG *  DATA   U_INT    0006H  2
+  i. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_INT    0004H  2
+  j. . . . . . . . . . . . . . . . . .  * REG *  DATA   U_INT    0002H  2
+angka1 . . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0000H  2
+angka2 . . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0002H  2
+angka3 . . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0004H  2
+angka4 . . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0006H  2
+angka5 . . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0008H  2
+number1. . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      000AH  2
+number2. . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      000CH  2
+hasilcount . . . . . . . . . . . . . .  PUBLIC   DATA   INT      000EH  2
+_push. . . . . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+  angka. . . . . . . . . . . . . . . .  * REG *  DATA   INT      0006H  2
+_?ix1000 . . . . . . . . . . . . . . .  STATIC   CODE   ARRAY    0003H  16
+hasil1 . . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0010H  2
+hasil2 . . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0012H  2
+row_finder1. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+row_finder2. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+row_finder3. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+row_finder4. . . . . . . . . . . . . .  PUBLIC   CODE   PROC     0000H  -----
+wchar_t. . . . . . . . . . . . . . . .  TYPEDEF  -----  CHAR     -----  1
+C1 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0094H  1
+C51 COMPILER V9.60.0.0   SOURCE_CODE                                                       06/07/2021 19:55:22 PAGE 12  
+
+NAME                                    CLASS   MSPACE  TYPE    OFFSET  SIZE
+====                                    =====   ======  ====    ======  ====
+
+
+C2 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0095H  1
+C3 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0096H  1
+C4 . . . . . . . . . . . . . . . . . .  ABSBIT   -----  BIT      0097H  1
+buffer . . . . . . . . . . . . . . . .  PUBLIC   DATA   INT      0014H  2
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1660    ----
+   CONSTANT SIZE    =     19    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     22      40
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

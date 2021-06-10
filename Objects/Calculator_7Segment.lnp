@@ -1,0 +1,3 @@
+".\Objects\SourceCode.obj" 
+TO ".\Objects\Calculator_7Segment" 
+PRINT(".\Listings\Calculator_7Segment.m51")
